@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PokemonListApp</string>
+    <string name="weight_label">W:%s</string>
+    <string name="height_label">H:%s</string>
+    <string name="preferences_todo" />
+</resources>
+
