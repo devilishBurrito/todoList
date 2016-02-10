@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/black"
+        >
 
     <TextView
         android:id="@+id/activity_main_day"
@@ -12,7 +14,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:textSize="22dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_purple"
+        />
 
     <!--<RelativeLayout-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
@@ -41,6 +45,8 @@
         android:layout_marginBottom="12dp"
         android:textSize= "18sp"
         android:inputType="text|textAutoComplete|textCapSentences"
+        android:imeOptions="actionDone"
+        android:textColor="#eab41f"
 
         />
 
@@ -61,10 +67,10 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_dark" />
+            android:background="#84358e" />
 
         <Button
-            android:id="@+id/activity_main_save"
+            android:id="@+id/activity_main_clear"
             style="@android:style/Widget.Holo.Button.Borderless.Small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,7 +78,7 @@
             android:layout_marginBottom="16dp"
 
             android:layout_weight="1"
-            android:background="@android:color/holo_red_dark" />
+            android:background="#913c9c" />
 
         <Button
             android:id="@+id/activity_main_right"
@@ -83,7 +89,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:background="@android:color/holo_blue_dark" />
+            android:background="#c64ed6" />
     </LinearLayout>
 
 </LinearLayout>

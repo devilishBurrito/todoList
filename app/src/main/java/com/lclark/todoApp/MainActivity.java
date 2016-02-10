@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         input = (EditText) findViewById((R.id.activity_main_input));
 
         back = (Button) findViewById(R.id.activity_main_left);
-        save = (Button) findViewById(R.id.activity_main_save);
+        save = (Button) findViewById(R.id.activity_main_clear);
         forward = (Button) findViewById(R.id.activity_main_right);
 
         setdays();
@@ -46,10 +48,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         save.setOnClickListener(this);
 
         back.setText(weekdays[date - 1]);
-        save.setText("SAVE");
+        save.setText("CLEAR");
         forward.setText(weekdays[date + 1]);
         day.setText(weekdays[date]);
         input.setHint("Your Plans for " + weekdays[date]);
+
+
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    words = String.valueOf(input.getText());
+                    editor.putString(weekdays[date], words);
+                    editor.commit();
+                    input.setText(preferences.getString(weekdays[date], null));
+                    Toast.makeText(MainActivity.this, "Your To-do List Has Been Updated", Toast.LENGTH_SHORT).show();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
     }
 
@@ -75,12 +94,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.activity_main_save) {
-            words = String.valueOf(input.getText());
-            editor.putString(weekdays[date], words);
+
+        if (v.getId() == R.id.activity_main_clear) {
+            editor.putString(weekdays[date], null);
             editor.commit();
             input.setText(preferences.getString(weekdays[date], null));
-            Toast.makeText(MainActivity.this, "Your To-do List Has Been Updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, weekdays[date] + " has been cleared", Toast.LENGTH_SHORT).show();
         }
 
         if (v.getId() == R.id.activity_main_left) {
